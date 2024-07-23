@@ -1,46 +1,29 @@
 const express = require('express');
-const router = express.Router();
-const User = require('../model/usermodel');
-const jwt = require('jsonwebtoken');
-const bcrypt = require("bcrypt")
-const maxAge = 3 * 24 * 60 * 60;
+const Note = require('../model/contentmodel');
 
+module.exports.addNotes = async (req, res, next) => {
+  const { title, content } = req.body;
 
-const createToken = (userId) => {
-    const token = jwt.sign({ userId }, "JWT", { expiresIn: maxAge });
-    return token;
-  };
-  
-  module.exports.Signup = async (req, res, next) => {
-    console.log(req.body, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-    const { email, password, name } = req.body
-    try {
-      const emailExist = await UserModel.findOne({ email: email })
-      if (emailExist) {
-        return res.json({ message: "Email already exist", status: false })
-      }
-      const newUser = new UserModel({
-        name: name,
-        email: email,
-        password: password,
-  
-      });
-  
-      const userDetails = await (newUser.save());
-      const token = createToken(userDetails._id);
-      return res.json({
-        message: "Account created Successfully",
-        status: true,
-        token,
-      });
-    }
-  
-    catch (err) {
-      console.log(err);
-      return res.json({
-        message: "Internal sever in signup",
-        status: false
-      });
-  
-    }
-  };
+  // Input validation
+  if (!title || !content) {
+    return res.status(400).json({ message: 'Title and content are required.' });
+  }
+
+  try {
+    // Create a new note
+    const newNote = new Note({
+      title,
+      content,
+    });
+
+    // Save the note to the database
+    await newNote.save();
+
+    // Send a success response
+    res.status(201).json({ message: 'Note added successfully', note: newNote });
+  } catch (error) {
+    // Handle any errors
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    next(error);
+  }
+};

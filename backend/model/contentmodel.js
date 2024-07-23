@@ -13,4 +13,4 @@ const ContentSchema= new Schema({
 });
 
 
-module.exports =mongoose.model('Content',ContentSchema)
+module.exports =mongoose.model('Note',ContentSchema)
