@@ -35,3 +35,21 @@ module.exports.getAllNotes = async (req, res, next) => {
     next(error);
   }
 };
+
+
+module.exports.deleteNote = async (req, res, next) => {
+  const noteId = req.params.id; 
+
+  try {
+    const deletedNote = await Note.findByIdAndDelete(noteId);
+
+    if (!deletedNote) {
+      return res.status(404).json({ message: 'Note not found' });
+    }
+
+    res.status(200).json({ message: 'Note deleted successfully', note: deletedNote });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    next(error);
+  }
+};
