@@ -1,0 +1,68 @@
+body{
+    padding: 30px;
+}
+.addnote-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .addnote-container h2 {
+    text-align: center;
+  }
+  
+  .addnote-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+  }
+  
+  .addnote-container label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .addnote-container input,
+  .addnote-container textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+   .addnote-container textarea{
+    min-width: 400px;
+    max-width: 470px;
+    min-height: 120px;
+   }
+  .addnote-container .error {
+    color: red;
+    font-size: 0.875em;
+    
+  }
+  .content-heade{
+    text-align: center;
+  }
+  
+  .addnote-container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 100px;
+  }
+  
+  .addnote-container button:hover {
+    background-color: #0056b3;
+  }
+  
