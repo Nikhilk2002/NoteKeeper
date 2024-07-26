@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Addnote.css';
 import { useNavigate } from 'react-router-dom';
+import { addNotes } from '../../Services/UserApi';
 
 const Addnote = () => {
   const [values, setValues] = useState({
@@ -9,7 +10,9 @@ const Addnote = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState(null);
   const navigate = useNavigate();
+
   const validate = () => {
     const errors = {};
     if (!values.title) {
@@ -38,16 +41,24 @@ const Addnote = () => {
     validate();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      navigate('/allnotes');
+      try {
+        console.log('Submitting note:', values); 
+        await addNotes(values);
+        navigate('/allnotes');
+      } catch (error) {
+        console.error('Error adding note:', error);
+        setSubmitError(error.message || 'Failed to add note');
+      }
     }
   };
 
   return (
     <div className="addnote-container">
       <h2>Add Note</h2>
+      {submitError && <div className="error">{submitError}</div>}
       <form onSubmit={handleSubmit}>
         <div className='content-heade'> 
           <label htmlFor="title">Title</label>
