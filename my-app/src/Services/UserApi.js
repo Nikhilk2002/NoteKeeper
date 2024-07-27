@@ -23,3 +23,15 @@ export const allnotes= async()=>{
   }
   
 }
+
+
+export const deleteNote = async (id) => {
+  try {
+    const response = await userInstance.delete(`allnotes/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error in delete note:', error.response ? error.response.data : error.message);
+    throw error.response ? error.response.data : new Error('Network error');
+  }
+};
+
