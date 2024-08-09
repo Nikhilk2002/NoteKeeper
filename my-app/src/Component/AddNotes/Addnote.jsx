@@ -47,13 +47,11 @@ const Addnote = () => {
         console.log('Submitting note:', values);
         await addNotes(values);
 
-        // Clear the input fields
         setValues({
           title: '',
           content: ''
         });
 
-        // Optionally, you can also clear errors if you want
         setErrors({});
         setSubmitError(null);
         
@@ -65,10 +63,10 @@ const Addnote = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-      <h2 className="text-2xl font-bold mb-6">Add Note</h2>
+    <div className="flex flex-col items-center p-6 min-h-72 mt-4">
+      <h2 className="text-2xl font-bold mb-6 mt-4">Add Note</h2>
       {submitError && <div className="text-red-500 mb-4">{submitError}</div>}
-      <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg relative">
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-slate-50 p-6 rounded-lg shadow-lg">
         <div className="mb-4">
           <input
             id="title"
@@ -78,7 +76,7 @@ const Addnote = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.title}
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {errors.title && (
             <div className="text-red-500 text-sm mt-1">{errors.title}</div>
@@ -93,7 +91,7 @@ const Addnote = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.content}
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm min-h-[100px]"
+            className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm min-h-[100px]"
           />
           {errors.content && (
             <div className="text-red-500 text-sm mt-1">{errors.content}</div>
@@ -102,7 +100,7 @@ const Addnote = () => {
 
         <button
           type="submit"
-          className="absolute bottom-6 right-6 text-indigo-600 hover:text-indigo-700 focus:outline-none"
+          className="reletive bottom-6 right-6 left-5 text-indigo-600 hover:text-indigo-700 focus:outline-none"
         >
           <FontAwesomeIcon icon={faPaperPlane} size="lg" />
         </button>
